@@ -1,0 +1,42 @@
+* {
+    font-family: 'Comic Sans MS', sans-serif;
+}
+
+/* Genel Container için Ortalama */
+.center-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ekran yüksekliğini kaplasın */
+}
+
+/* Ortadaki Form Elemanları */
+.center-container input, .center-container select {
+    width: 300px; /* Kullanıcı adı, zorluk seçimi ve buton aynı genişlikte */
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3B4CCA; /* Pokémon mavisi ile uyumlu */
+    background-color: #5ae430; /* Pokémon sarı rengi */
+    text-align: center;
+}
+
+/* Button Stil Özelleştirmesi */
+.center-container button {
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+#__vbox0 {
+    background-color: #f5e1a4 !important;
+}
+
+/* Mobil uyumluluk için genişlik ayarı */
+@media screen and (max-width: 480px) {
+    .center-container input, .center-container select, .center-container button {
+        width: 90%; /* Mobil cihazlarda genişlik ekranın %90'ı */
+    }
+}
