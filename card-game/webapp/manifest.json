@@ -78,20 +78,28 @@
       },
       "routes": [
         {
-          "name": "RouteMainView",
-          "pattern": ":?query:",
-          "target": [
-            "TargetMainView"
-          ]
+            "pattern": "",
+            "name": "main",
+            "target": "MainView"
+        },
+        {
+            "pattern": "game",
+            "name": "game",
+            "target": "GameView"
         }
       ],
       "targets": {
-        "TargetMainView": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "MainView",
-          "viewName": "MainView"
+        "MainView": {
+            "viewName": "MainView",
+            "viewLevel": 1,
+            "viewPath": "cardgame.cardgame.view",
+            "viewType": "XML"
+        },
+        "GameView": {
+            "viewName": "GameView",
+            "viewLevel": 2,
+            "viewPath": "cardgame.cardgame.view",
+            "viewType": "XML"
         }
       }
     },

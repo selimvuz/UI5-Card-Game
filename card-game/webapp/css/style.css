@@ -7,6 +7,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #f5e1a4;
+    height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
 }
 
@@ -27,8 +36,79 @@
     transition: background-color 0.3s ease;
 }
 
-#__vbox0 {
-    background-color: #f5e1a4 !important;
+.game-grid {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+
+.easy-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+}
+
+@media (max-width: 768px) {
+    .easy-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.medium-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+}
+
+@media (max-width: 1024px) {
+    .medium-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .medium-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.hard-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+}
+
+@media (max-width: 768px) {
+    .hard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.sapMPanel {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.sapMPanel:hover {
+    transform: scale(1.15);
+}
+
+.sapMImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#timerDisplay {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B4CCA;
+    margin-bottom: 20px;
 }
 
 #viewPortContainer {
@@ -37,6 +117,6 @@
 
 @media screen and (max-width: 480px) {
     .center-container input, .center-container select, .center-container button {
-        width: 90%; /* Mobil cihazlarda genişlik ekranın %90'ı */
+        width: 90%;
     }
 }

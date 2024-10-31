@@ -15,18 +15,16 @@ function (Controller) {
         onStartGame: function() {
             var username = this.byId("usernameInput").getValue();
             var difficulty = this.byId("difficultySelect").getSelectedKey();
-
+            
             if (username) {
                 localStorage.setItem("username", username);
-
-                this.startGame(difficulty);
+                localStorage.setItem("difficulty", difficulty);
+                
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("game");
             } else {
                 sap.m.MessageToast.show("Lütfen kullanıcı adınızı girin.");
             }
-        },
-
-        startGame: function(difficulty) {
-
         }
     });
 });
