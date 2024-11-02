@@ -129,6 +129,11 @@
     transform: rotateY(180deg);
 }
 
+.sapUiRespGridSpanXL3 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
 
 #timerDisplay {
     font-size: 18px;
