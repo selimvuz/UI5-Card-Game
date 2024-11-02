@@ -12,7 +12,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f5e1a4;
+    background-image: url('../assets/main-menu.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: auto !important;
+    background-position: top left !important;
     height: 100vh;
 }
 
@@ -149,15 +152,11 @@
     align-items: center !important;
 }
 
-#timerDisplay {
-    font-size: 18px;
-    font-weight: bold;
-    color: #3B4CCA;
-    margin-bottom: 20px;
-}
-
 #viewPortContainer {
-    background-color: #ecd07a !important;
+    background-image: url('../assets/background.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: auto !important;
+    background-position: top left !important;
 }
 
 .sapMLIB {
@@ -166,6 +165,23 @@
 
 .sapMTableTH {
     background-color: #beaca3 !important;
+}
+
+.sapMPage {
+    background-image: url('../assets/card-board.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: auto !important;
+    background-position: top left !important;
+}
+
+.sapMText {
+    color: #cf6915 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+}
+
+.sapMPageHeader {
+    background-color: #abb1e4 !important;
 }
 
 @media screen and (max-width: 480px) {
