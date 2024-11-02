@@ -39,7 +39,7 @@ sap.ui.define([
 							"tiles": [{
 								"tileType": "sap.ushell.ui.tile.StaticTile",
 								"properties": {
-									"title": "UI5 Card Game",
+									"title": "SMOD Card Game",
 									"targetURL": "#cardgamecardgame-display"
 								}
 							}]
@@ -55,7 +55,7 @@ sap.ui.define([
 								"semanticObject": "cardgamecardgame",
 								"action": "display",
 								"description": "An SAP Fiori card game app.",
-								"title": "UI5 Card Game",
+								"title": "SMOD Card Game",
 								"signature": {
 									"parameters": {}
 								},

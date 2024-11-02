@@ -3,21 +3,25 @@
     xmlns:core="sap.ui.core"
     xmlns="sap.m">
 
-    <VBox class="center-container" justifyContent="Center" alignItems="Center" id="menuContent">
+    <Page showNavButton="true" title="{i18n>title.logout}" navButtonPress=".onNavBack">
+        <VBox class="center-container" justifyContent="Center" alignItems="Center" id="menuContent">
+        
         <Input
             id="usernameInput"
-            placeholder="Kullanıcı adınızı girin"
+            placeholder="{i18n>placeholder.username}"
             width="300px" />
         
         <Select id="difficultySelect" width="300px">
             <items>
-                <core:Item key="easy" text="Kolay" />
-                <core:Item key="medium" text="Orta" />
-                <core:Item key="hard" text="Zor" />
+                <core:Item key="easy" text="{i18n>difficulty.easy}" />
+                <core:Item key="medium" text="{i18n>difficulty.medium}" />
+                <core:Item key="hard" text="{i18n>difficulty.hard}" />
             </items>
         </Select>
 
-        <Button id="startButton" text="Başla" width="300px" press="onStartGame" />
-        <Button text="Sıralama" width="300px" press="onShowScores" />
+        <Button id="startButton" text="{i18n>button.start}" width="300px" press="onStartGame" />
+        <Button text="{i18n>button.scores}" width="300px" press="onShowScores" />
+        
     </VBox>
+    </Page>
 </mvc:View>

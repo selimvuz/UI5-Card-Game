@@ -16,6 +16,22 @@ sap.ui.define([
 
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.getRoute("game").attachMatched(this.onRouteMatched, this);
+
+            this.getOwnerComponent().getService("ShellUIService").then(function(oShellService) {
+                oShellService.setBackNavigation(function() {
+                    window.gameMusic.pause();
+                    
+                    // CrossApplicationNavigation servisini kullanarak Shell-home'a yönlendiriyoruz
+                    var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+                    
+                    oCrossAppNavigator.toExternal({
+                        target: {
+                            shellHash: "#Shell-home"
+                        }
+                    });
+                oShellService.set
+                });
+            });                    
         },
 
         onRouteMatched: function () {
@@ -25,6 +41,8 @@ sap.ui.define([
         startGame: function () {
             this.currentScore = 0;
             this.updateScoreDisplay();
+
+            window.gameMusic.play();
             
             var difficulty = localStorage.getItem("difficulty");
             var gameArea = this.byId("gameArea");
@@ -96,12 +114,17 @@ sap.ui.define([
         startTimer: function () {
             var timerDisplay = this.byId("timerDisplay");
             var time = 0;
-
+        
             this.timerInterval = setInterval(function () {
                 time++;
-                timerDisplay.setText("Zaman: " + time + " saniye | Puan: " + this.currentScore);
+                
+                var oBundle = this.getView().getModel("i18n").getResourceBundle();
+                var timeText = oBundle.getText("label.time", [time]);
+                var scoreText = oBundle.getText("label.score", [this.currentScore]);
+                
+                timerDisplay.setText(timeText + " | " + scoreText);
             }.bind(this), 1000);
-        },
+        },        
 
         checkForMatch: function () {
             var card1 = this.selectedCards[0];
@@ -140,18 +163,22 @@ sap.ui.define([
             if (this.isCardFlipping || cardElement.classList.contains("flipped") || cardElement.classList.contains("matched")) {
                 return;
             }
-
+        
+            var flipSound = new Audio(window.cardFlip.src);
+            flipSound.play();
+        
             cardElement.classList.add("flipped");
             this.selectedCards.push(cardElement);
-
+        
             if (this.selectedCards.length === 2) {
                 this.isCardFlipping = true;
                 this.checkForMatch();
             }
-        },
+        },        
 
         onGameWon: function () {
             clearInterval(this.timerInterval);
+            winSound.play();
             MessageToast.show("Tebrikler, kazandınız! Puanınız: " + this.currentScore);
 
             this.saveScore();
@@ -187,8 +214,16 @@ sap.ui.define([
         },
         
         onNavBack: function () {
+            if (window.gameMusic && !window.gameMusic.paused) {
+                window.gameMusic.pause();
+            }
+        
+            if (window.menuMusic && window.menuMusic.paused) {
+                window.menuMusic.play();
+            }
+        
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-            oRouter.navTo("main", {}, true);
-        }
+            oRouter.navTo("main", {}, false);
+        }        
     });
 });

@@ -1,5 +1,10 @@
 * {
     font-family: 'Comic Sans MS', sans-serif;
+    
+}
+
+.sapMPageEnableScrolling {
+    overflow: hidden !important;
 }
 
 .center-container {

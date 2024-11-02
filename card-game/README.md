@@ -9,7 +9,7 @@
 |**Service Type**<br>None|
 |**Service URL**<br>N/A|
 |**Module Name**<br>card-game|
-|**Application Title**<br>UI5 Card Game|
+|**Application Title**<br>SMOD Card Game|
 |**Namespace**<br>cardgame|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.129.2|

@@ -3,18 +3,18 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
 
-    <Page title="Skor Tablosu" showNavButton="true" navButtonPress=".onNavBack">
+    <Page title="{i18n>title.scoreTable}" showNavButton="true" navButtonPress=".onNavBack">
         <content>
-            <Table id="scoreTable" items="{/scores}">
+            <Table id="scoreTable" items="{/scores}" noDataText="{i18n>no.data}">
                 <columns>
                     <Column hAlign="Center">
-                        <Text text="Kullanıcı Adı" />
+                        <Text text="{i18n>column.username}" />
                     </Column>
                     <Column hAlign="Center">
-                        <Text text="Puan" />
+                        <Text text="{i18n>column.score}" />
                     </Column>
                     <Column hAlign="Center">
-                        <Text text="Süre" />
+                        <Text text="{i18n>column.time}" />
                     </Column>
                 </columns>
                 <items>
@@ -31,7 +31,7 @@
         <footer>
             <Toolbar>
                 <ToolbarSpacer />
-                <Button text="Menü" press="onNavBack" />
+                <Button text="{i18n>button.menu}" press="onNavBack" />
             </Toolbar>
         </footer>
     </Page>

@@ -3,7 +3,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     
-    <Page showNavButton="true" navButtonPress=".onNavBack">
+    <Page showNavButton="true" title="{i18n>title.returnToMenu}" navButtonPress=".onNavBack">
         <VBox class="game-container" justifyContent="Center" alignItems="Center">
             <Text id="timerDisplay" text="Zaman: 0 saniye" />
             <VBox id="gameArea" class="game-grid"></VBox>
