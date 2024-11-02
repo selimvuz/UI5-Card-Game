@@ -113,6 +113,11 @@ sap.ui.define([
         startTimer: function () {
             var timerDisplay = this.byId("timerDisplay");
             var time = 0;
+
+            if (this.timerInterval) {
+                clearInterval(this.timerInterval);
+                this.timerInterval = null;
+            }
         
             this.timerInterval = setInterval(function () {
                 time++;
@@ -123,7 +128,7 @@ sap.ui.define([
                 
                 timerDisplay.setText(timeText + " | " + scoreText);
             }.bind(this), 1000);
-        },        
+        },
 
         checkForMatch: function () {
             var card1 = this.selectedCards[0];
