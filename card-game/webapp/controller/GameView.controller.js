@@ -145,10 +145,13 @@ sap.ui.define([
 
         onGameWon: function () {
             clearInterval(this.timerInterval);
-            MessageToast.show("Tebrikler, oyunu kazandınız! Puanınız: " + this.currentScore);
+            MessageToast.show("Tebrikler, kazandınız! Puanınız: " + this.currentScore);
 
             this.saveScore();
-            window.gameMusic.pause();
+
+            if (window.gameMusic !== undefined) {
+                window.gameMusic.pause();
+            }
 
             setTimeout(function () {
                 var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -163,12 +166,17 @@ sap.ui.define([
             var scores = JSON.parse(localStorage.getItem("scores")) || {};
         
             var time = parseInt(this.byId("timerDisplay").getText().split(" ")[1], 10);
-            scores[username] = {
-                score: Math.max(this.currentScore, scores[username]?.score || 0),
-                time: scores[username]?.time && scores[username].score >= this.currentScore ? scores[username].time : time // Eğer skor daha yüksek değilse eski süreyi koru
-            };
+            var previousScore = scores[username]?.score || 0;
+            var previousTime = scores[username]?.time || Infinity;
+
+            if (this.currentScore > previousScore || (this.currentScore === previousScore && time < previousTime)) {
+                scores[username] = {
+                    score: this.currentScore,
+                    time: time
+                };
+            }
         
             localStorage.setItem("scores", JSON.stringify(scores));
-        }
+        }        
     });
 });
