@@ -18,5 +18,6 @@
         </Select>
 
         <Button id="startButton" text="Başla" width="300px" press="onStartGame" />
+        <Button text="Sıralama" press="onShowScores" />
     </VBox>
 </mvc:View>

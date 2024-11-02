@@ -1,16 +1,24 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/layout/Grid"
-], function (Controller, Grid) {
+    "sap/ui/layout/Grid",
+    "sap/m/MessageToast"
+], function (Controller, Grid, MessageToast) {
     "use strict";
 
     return Controller.extend("cardgame.cardgame.controller.GameView", {
         onInit: function () {
             this.selectedCards = [];
+            this.isCardFlipping = false;
+            this.currentScore = 0;
+            this.matchedPairs = 0;
+            this.totalPairs = 0;
             this.startGame();
         },
 
         startGame: function () {
+            this.currentScore = 0;
+            this.updateScoreDisplay();
+            
             var difficulty = localStorage.getItem("difficulty");
             var gameArea = this.byId("gameArea");
             gameArea.removeAllItems();
@@ -33,6 +41,7 @@ sap.ui.define([
                     break;
             }
 
+            this.totalPairs = pokemonCount;
             var pokemonList = [];
             for (var i = 0; i < pokemonCount; i++) {
                 pokemonList.push(i + 1);
@@ -83,34 +92,83 @@ sap.ui.define([
 
             this.timerInterval = setInterval(function () {
                 time++;
-                timerDisplay.setText("Zaman: " + time + " saniye");
-            }, 1000);
+                timerDisplay.setText("Zaman: " + time + " saniye | Puan: " + this.currentScore);
+            }.bind(this), 1000);
         },
 
         checkForMatch: function () {
             var card1 = this.selectedCards[0];
             var card2 = this.selectedCards[1];
-        
+
             if (card1.dataset.cardId === card2.dataset.cardId) {
+                card1.classList.add("matched");
+                card2.classList.add("matched");
+                
+                this.currentScore += 100;
+                this.updateScoreDisplay();
+
                 this.selectedCards = [];
+                this.isCardFlipping = false;
+
+                this.matchedPairs++;
+                if (this.matchedPairs === this.totalPairs) {
+                    this.onGameWon();
+                }
             } else {
                 setTimeout(function () {
                     card1.classList.remove("flipped");
                     card2.classList.remove("flipped");
                     this.selectedCards = [];
-                }.bind(this), 1000);
+                    this.isCardFlipping = false;
+                }.bind(this), 500);
             }
         },
 
-        onCardClick: function (cardElement) {
-            if (!cardElement.classList.contains("flipped")) {
-                cardElement.classList.add("flipped");
-                this.selectedCards.push(cardElement);
+        updateScoreDisplay: function () {
+            var timerDisplay = this.byId("timerDisplay");
+            timerDisplay.setText("Zaman: " + timerDisplay.getText().split(" ")[1] + " | Puan: " + this.currentScore);
+        },
 
-                if (this.selectedCards.length === 2) {
-                    this.checkForMatch();
-                }
+        onCardClick: function (cardElement) {
+            if (this.isCardFlipping || cardElement.classList.contains("flipped") || cardElement.classList.contains("matched")) {
+                return;
             }
-        }        
+
+            cardElement.classList.add("flipped");
+            this.selectedCards.push(cardElement);
+
+            if (this.selectedCards.length === 2) {
+                this.isCardFlipping = true;
+                this.checkForMatch();
+            }
+        },
+
+        onGameWon: function () {
+            clearInterval(this.timerInterval);
+            MessageToast.show("Tebrikler, oyunu kazandınız! Puanınız: " + this.currentScore);
+
+            this.saveScore();
+            window.gameMusic.pause();
+
+            setTimeout(function () {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("main", {}, true);
+                location.reload();
+                window.menuMusic.play();
+            }.bind(this), 3000);
+        },
+
+        saveScore: function () {
+            var username = localStorage.getItem("username");
+            var scores = JSON.parse(localStorage.getItem("scores")) || {};
+        
+            var time = parseInt(this.byId("timerDisplay").getText().split(" ")[1], 10);
+            scores[username] = {
+                score: Math.max(this.currentScore, scores[username]?.score || 0),
+                time: scores[username]?.time && scores[username].score >= this.currentScore ? scores[username].time : time // Eğer skor daha yüksek değilse eski süreyi koru
+            };
+        
+            localStorage.setItem("scores", JSON.stringify(scores));
+        }
     });
 });

@@ -1,0 +1,39 @@
+<mvc:View
+    controllerName="cardgame.cardgame.controller.ScoresView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Page title="Skor Tablosu">
+        <content>
+            <Table id="scoreTable" items="{/scores}">
+                <columns>
+                    <Column>
+                        <Text text="Kullanıcı Adı" />
+                    </Column>
+                    <Column>
+                        <Text text="Puan" />
+                    </Column>
+                    <Column>
+                        <Text text="Süre" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{username}" />
+                            <Text text="{score}" />
+                            <Text text="{time}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer />
+                <Button text="Menü" press="onNavBack" />
+            </Toolbar>
+        </footer>
+    </Page>
+
+</mvc:View>
