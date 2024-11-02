@@ -13,6 +13,13 @@ sap.ui.define([
             this.matchedPairs = 0;
             this.totalPairs = 0;
             this.startGame();
+
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.getRoute("game").attachMatched(this.onRouteMatched, this);
+        },
+
+        onRouteMatched: function () {
+            this.startGame();
         },
 
         startGame: function () {
@@ -177,6 +184,11 @@ sap.ui.define([
             }
         
             localStorage.setItem("scores", JSON.stringify(scores));
-        }        
+        },
+        
+        onNavBack: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("main", {}, true);
+        }
     });
 });

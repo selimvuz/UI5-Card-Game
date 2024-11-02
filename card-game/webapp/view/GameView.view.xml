@@ -3,8 +3,10 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     
-    <VBox class="game-container" justifyContent="Center" alignItems="Center">
-        <Text id="timerDisplay" text="Zaman: 0 saniye" />
-        <VBox id="gameArea" class="game-grid"></VBox>
-    </VBox>
+    <Page showNavButton="true" navButtonPress=".onNavBack">
+        <VBox class="game-container" justifyContent="Center" alignItems="Center">
+            <Text id="timerDisplay" text="Zaman: 0 saniye" />
+            <VBox id="gameArea" class="game-grid"></VBox>
+        </VBox>
+    </Page>
 </mvc:View>

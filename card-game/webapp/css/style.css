@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80vh;
 }
 
 .center-container input, .center-container select {
@@ -103,6 +103,9 @@
 .pokemon-card {
     width: 100px;
     height: 150px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
 .pokemon-card-inner {
@@ -135,6 +138,12 @@
     align-items: center !important;
 }
 
+.sapUiRespGridSpanXL4 {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 #timerDisplay {
     font-size: 18px;
     font-weight: bold;
@@ -144,6 +153,14 @@
 
 #viewPortContainer {
     background-color: #ecd07a !important;
+}
+
+.sapMLIB {
+    background-color: #5ae430 !important;
+}
+
+.sapMTableTH {
+    background-color: #beaca3 !important;
 }
 
 @media screen and (max-width: 480px) {

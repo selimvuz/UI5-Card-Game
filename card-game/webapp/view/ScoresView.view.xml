@@ -3,26 +3,26 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
 
-    <Page title="Skor Tablosu">
+    <Page title="Skor Tablosu" showNavButton="true" navButtonPress=".onNavBack">
         <content>
             <Table id="scoreTable" items="{/scores}">
                 <columns>
-                    <Column>
+                    <Column hAlign="Center">
                         <Text text="Kullanıcı Adı" />
                     </Column>
-                    <Column>
+                    <Column hAlign="Center">
                         <Text text="Puan" />
                     </Column>
-                    <Column>
+                    <Column hAlign="Center">
                         <Text text="Süre" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem>
                         <cells>
-                            <Text text="{username}" />
-                            <Text text="{score}" />
-                            <Text text="{time}" />
+                            <Text text="{username}" textAlign="Center" />
+                            <Text text="{score}" textAlign="Center" />
+                            <Text text="{time}" textAlign="Center" />
                         </cells>
                     </ColumnListItem>
                 </items>
