@@ -8,10 +8,8 @@ function (Controller) {
         onInit: function() {
             this.getOwnerComponent().getService("ShellUIService").then(function(oShellService) {
                 oShellService.setBackNavigation(function() {
-                    // Menü müziğini durduruyoruz
                     window.menuMusic.pause();
                     
-                    // CrossApplicationNavigation servisini kullanarak Shell-home'a yönlendiriyoruz
                     var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
                     
                     oCrossAppNavigator.toExternal({

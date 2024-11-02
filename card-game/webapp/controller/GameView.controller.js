@@ -21,7 +21,6 @@ sap.ui.define([
                 oShellService.setBackNavigation(function() {
                     window.gameMusic.pause();
                     
-                    // CrossApplicationNavigation servisini kullanarak Shell-home'a yönlendiriyoruz
                     var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
                     
                     oCrossAppNavigator.toExternal({
@@ -179,7 +178,12 @@ sap.ui.define([
         onGameWon: function () {
             clearInterval(this.timerInterval);
             winSound.play();
-            MessageToast.show("Tebrikler, kazandınız! Puanınız: " + this.currentScore);
+            var i18nModel = this.getView().getModel("i18n");
+            var oBundle = i18nModel.getResourceBundle();
+
+            var sMessage = oBundle.getText("winMessage", [this.currentScore]);
+
+            MessageToast.show(sMessage);
 
             this.saveScore();
 
