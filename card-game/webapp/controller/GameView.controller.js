@@ -171,6 +171,12 @@ sap.ui.define([
         startTimer: function () {
             var timerDisplay = this.byId("timerDisplay");
             var time = 0;
+            var oBundle = this.getView().getModel("i18n").getResourceBundle();
+            var timeText = oBundle.getText("label.time", [time]);
+            var scoreText = oBundle.getText("label.score", [this.currentScore]);
+            var sStartMessage = oBundle.getText("startMessage");
+
+            MessageToast.show(sStartMessage);
 
             if (this.timerInterval) {
                 clearInterval(this.timerInterval);
@@ -179,13 +185,6 @@ sap.ui.define([
         
             this.timerInterval = setInterval(function () {
                 time++;
-                
-                var oBundle = this.getView().getModel("i18n").getResourceBundle();
-                var timeText = oBundle.getText("label.time", [time]);
-                var scoreText = oBundle.getText("label.score", [this.currentScore]);
-                var sStartMessage = oBundle.getText("startMessage");
-
-                MessageToast.show(sStartMessage);
                 
                 timerDisplay.setText(timeText + " | " + scoreText);
             }.bind(this), 1000);
