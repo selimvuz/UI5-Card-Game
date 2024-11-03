@@ -47,6 +47,16 @@ sap.ui.define([
             var gameArea = this.byId("gameArea");
             gameArea.removeAllItems();
 
+            var timerDisplay = this.byId("timerDisplay");
+            var oModel = this.getView().getModel("i18n");
+            if (oModel) {
+                var oBundle = oModel.getResourceBundle();
+                var loadingMessage = oBundle.getText("label.loadingCards");
+                timerDisplay.setText(loadingMessage);
+            } else {
+                console.error("i18n modeli yüklenmedi.");
+            }
+
             var pokemonCount;
             var gridSettings;
 
@@ -68,7 +78,7 @@ sap.ui.define([
             this.totalPairs = pokemonCount;
             
             var allPokemonImages = [];
-            for (var i = 1; i <= 33; i++) {
+            for (var i = 1; i <= 32; i++) {
                 allPokemonImages.push(i);
             }
 
@@ -94,28 +104,60 @@ sap.ui.define([
                 defaultSpan: gridSettings.defaultSpan
             });
 
-            for (var j = 0; j < pokemonList.length; j++) {
+            gameArea.addItem(grid);
+
+            pokemonList.forEach(function (pokemon, index) {
                 var cardHTML = new sap.ui.core.HTML({
                     content: `
-                        <div class="pokemon-card" id="card-${j}" data-card-id="${pokemonList[j]}" onclick="sap.ui.getCore().byId('${this.getView().getId()}').getController().onCardClick(this)">
+                        <div class="pokemon-card" id="card-${index}" data-card-id="${pokemon}" onclick="sap.ui.getCore().byId('${this.getView().getId()}').getController().onCardClick(this)">
                             <div class="pokemon-card-inner">
                                 <div class="pokemon-card-front">
                                     <img src="../assets/pokemon-back.png" width="100px" height="150px" />
                                 </div>
                                 <div class="pokemon-card-back">
-                                    <img src="../assets/pokemon${pokemonList[j]}.jpg" width="100px" height="150px" />
+                                    <img src="../assets/pokemon${pokemon}.jpg" width="100px" height="150px" />
                                 </div>
                             </div>
                         </div>
-                    `
+                    `,
+                    afterRendering: function() {
+                        setTimeout(function() {
+                            var cardElement = document.getElementById(`card-${index}`);
+                            if (cardElement) {
+                                cardElement.classList.add("deal");
+
+                                setTimeout(function() {
+                                    cardElement.classList.remove("deal");
+                                    cardElement.classList.add("nodeal");
+                                }, 500);
+
+                                window.cardFlip.currentTime = 0;
+                                window.cardFlip.play();
+                            }
+                        }, index * 400);
+                    }
                 });
 
                 grid.addContent(cardHTML);
+
+            }.bind(this));
+
+            var delay;
+            switch (difficulty) {
+                case "easy":
+                    delay = 3200;
+                    break;
+                case "medium":
+                    delay = 4800;
+                    break;
+                case "hard":
+                    delay = 6400;
+                    break;
             }
 
-            gameArea.addItem(grid);
-
-            this.startTimer();
+            setTimeout(() => {
+                this.startTimer();
+            }, delay);
         },
 
         shuffleArray: function (array) {

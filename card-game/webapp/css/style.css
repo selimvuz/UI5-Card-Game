@@ -93,27 +93,47 @@
     }
 }
 
+@keyframes deal {
+    from {
+        transform: translateY(-500px) rotateY(0);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) rotateY(0);
+        opacity: 1;
+    }
+}
+
 .pokemon-card {
+    opacity: 0;
+    transform: translateY(-500px);
     transition: transform 0.3s;
     transform-style: preserve-3d;
     cursor: pointer;
+    width: 100px;
+    height: 150px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-.pokemon-card.flipped {
+.pokemon-card.deal {
+    animation: deal 0.5s forwards;
+    pointer-events: none;
+}
+
+.pokemon-card.nodeal {
+    opacity: 1;
+    transform: translateY(+0px);
+}
+
+.pokemon-card.nodeal.flipped {
     transform: rotateY(180deg);
 }
 
 .pokemon-card:not(.flipped):hover {
     transform: scale(1.15);
     transition: transform 0.3s ease-in-out;
-}
-
-.pokemon-card {
-    width: 100px;
-    height: 150px;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
 }
 
 .pokemon-card-inner {
@@ -160,11 +180,11 @@
 }
 
 .sapMLIB {
-    background-color: #5ae430 !important;
+    background-color: #1e520f !important;
 }
 
 .sapMTableTH {
-    background-color: #beaca3 !important;
+    background-color: #60960a !important;
 }
 
 .sapMPage {
@@ -175,7 +195,7 @@
 }
 
 .sapMText {
-    color: #cf6915 !important;
+    color: #f1aac5 !important;
     font-size: 24px !important;
     font-weight: bold !important;
 }
