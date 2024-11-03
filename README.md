@@ -8,12 +8,10 @@ This is a Pokemon-themed memory matching game developed using SAPUI5. The game c
 - Card Matching Mechanism: Flip Pokemon cards and try to match pairs.
 - Timer: The game is timed, allowing players to track how fast they can match all pairs.
 - Score Tracking: Scores are saved using localStorage, and a history of previous games is - displayed.
-- Custom Controls: UI5 components are used to create the game board, Pokemon cards, and timer.
-- Responsiveness: The layout adapts to different screen sizes, with grid adjustments for various difficulty levels.
 
 ## How to Play
 - Enter your username.
-- Select a difficulty level. (Easy, Medium, Hard)
+- Select a difficulty level.
 - Click the Start button to begin the game.
 - Flip the cards to find matching pairs.
 - Try to match all pairs in the shortest time possible.
