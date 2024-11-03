@@ -66,10 +66,26 @@ sap.ui.define([
             }
 
             this.totalPairs = pokemonCount;
+            
+            var allPokemonImages = [];
+            for (var i = 1; i <= 33; i++) {
+                allPokemonImages.push(i);
+            }
+
+            var selectedPokemons = [];
+            while (selectedPokemons.length < pokemonCount) {
+                var randomIndex = Math.floor(Math.random() * allPokemonImages.length);
+                var selectedPokemon = allPokemonImages[randomIndex];
+
+                if (!selectedPokemons.includes(selectedPokemon)) {
+                    selectedPokemons.push(selectedPokemon);
+                }
+            }
+
             var pokemonList = [];
-            for (var i = 0; i < pokemonCount; i++) {
-                pokemonList.push(i + 1);
-                pokemonList.push(i + 1);
+            for (var i = 0; i < selectedPokemons.length; i++) {
+                pokemonList.push(selectedPokemons[i]);
+                pokemonList.push(selectedPokemons[i]);
             }
 
             pokemonList = this.shuffleArray(pokemonList);
