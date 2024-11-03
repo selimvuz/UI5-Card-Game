@@ -12,6 +12,8 @@ sap.ui.define([
             this.currentScore = 0;
             this.matchedPairs = 0;
             this.totalPairs = 0;
+            this.time = 0;
+            this.isPaused = false;
             this.startGame();
 
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -37,11 +39,40 @@ sap.ui.define([
             this.startGame();
         },
 
+        onPauseGame: function () {
+            if (!this.isPaused) {
+                clearInterval(this.timerInterval);
+                this.disableAllCards();
+                this.isPaused = true;
+            } else {
+                this.startTimer();
+                this.enableAllCards();
+                this.isPaused = false;
+            }
+        },
+
+        disableAllCards: function () {
+            var gameArea = this.byId("gameArea");
+            var cardElements = gameArea.$().find(".pokemon-card");
+            cardElements.addClass("disabled");
+        },
+
+        enableAllCards: function () {
+            var gameArea = this.byId("gameArea");
+            var cardElements = gameArea.$().find(".pokemon-card");
+            cardElements.removeClass("disabled");
+        },
+
         startGame: function () {
             this.currentScore = 0;
+            this.time = 0;
             this.updateScoreDisplay();
 
-            window.gameMusic.play();
+            clearTimeout(this.timerInterval);
+
+            if (window.gameMusic !== undefined) {
+                window.gameMusic.play();
+            }
             
             var difficulty = localStorage.getItem("difficulty");
             var gameArea = this.byId("gameArea");
@@ -78,7 +109,7 @@ sap.ui.define([
             this.totalPairs = pokemonCount;
             
             var allPokemonImages = [];
-            for (var i = 1; i <= 32; i++) {
+            for (var i = 1; i <= 31; i++) {
                 allPokemonImages.push(i);
             }
 
@@ -115,7 +146,7 @@ sap.ui.define([
                                     <img src="../assets/pokemon-back.png" width="100px" height="150px" />
                                 </div>
                                 <div class="pokemon-card-back">
-                                    <img src="../assets/pokemon${pokemon}.jpg" width="100px" height="150px" />
+                                    <img src="../assets/pokemons/pokemon${pokemon}.jpg" width="100px" height="150px" />
                                 </div>
                             </div>
                         </div>
@@ -131,8 +162,10 @@ sap.ui.define([
                                     cardElement.classList.add("nodeal");
                                 }, 500);
 
-                                window.cardFlip.currentTime = 0;
-                                window.cardFlip.play();
+                                if (window.cardFlip !== undefined) {
+                                    window.cardFlip.currentTime = 0;
+                                    window.cardFlip.play();
+                                }
                             }
                         }, index * 400);
                     }
@@ -170,13 +203,8 @@ sap.ui.define([
 
         startTimer: function () {
             var timerDisplay = this.byId("timerDisplay");
-            var time = 0;
-            var oBundle = this.getView().getModel("i18n").getResourceBundle();
-            var timeText = oBundle.getText("label.time", [time]);
-            var scoreText = oBundle.getText("label.score", [this.currentScore]);
-            var sStartMessage = oBundle.getText("startMessage");
-
-            MessageToast.show(sStartMessage);
+            // this.time = 0;
+            var showOnlyOnce = true;
 
             if (this.timerInterval) {
                 clearInterval(this.timerInterval);
@@ -184,7 +212,17 @@ sap.ui.define([
             }
         
             this.timerInterval = setInterval(function () {
-                time++;
+                this.time++;
+                
+                var oBundle = this.getView().getModel("i18n").getResourceBundle();
+                var timeText = oBundle.getText("label.time", [this.time]);
+                var scoreText = oBundle.getText("label.score", [this.currentScore]);
+                var sStartMessage = oBundle.getText("startMessage");
+
+                if (showOnlyOnce) {
+                    MessageToast.show(sStartMessage);
+                    showOnlyOnce = false;
+                }
                 
                 timerDisplay.setText(timeText + " | " + scoreText);
             }.bind(this), 1000);
@@ -290,9 +328,17 @@ sap.ui.define([
             if (window.menuMusic && window.menuMusic.paused) {
                 window.menuMusic.play();
             }
+
+            if (window.flipSound) {
+                do {
+                    window.flipSound.pause();
+                } while ( window.flipSound.paused )
+            }
         
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("main", {}, false);
+
+            this.isPaused = false;
         }        
     });
 });

@@ -4,8 +4,13 @@
     xmlns="sap.m">
 
     <Page showNavButton="true" title="{i18n>title.logout}" navButtonPress=".onNavBack">
+        <headerContent>
+            <Button text="{i18n>button.sound}" press=".onSound" icon="sap-icon://sound" />
+        </headerContent>
+
         <VBox class="center-container" justifyContent="Center" alignItems="Center" id="menuContent">
-        
+        <Image class="logo" src="../assets/logo.png" alt="Pokemon Logo" width="100%" height="auto" />
+
         <Input
             id="usernameInput"
             placeholder="{i18n>placeholder.username}"
@@ -20,8 +25,7 @@
         </Select>
 
         <Button id="startButton" text="{i18n>button.start}" width="300px" press="onStartGame" />
-        <Button text="{i18n>button.scores}" width="300px" press="onShowScores" />
-        
+        <Button text="{i18n>button.scores}" width="300px" press="onShowScores" />     
     </VBox>
     </Page>
 </mvc:View>

@@ -4,6 +4,9 @@
     xmlns="sap.m">
     
     <Page showNavButton="true" title="{i18n>title.returnToMenu}" navButtonPress=".onNavBack">
+        <headerContent>
+            <Button text="{i18n>button.pause}" press=".onPauseGame" icon="sap-icon://pause" />
+        </headerContent>
         <VBox class="game-container" justifyContent="Center" alignItems="Center">
             <Text id="timerDisplay" text="..." />
             <VBox id="gameArea" class="game-grid"></VBox>

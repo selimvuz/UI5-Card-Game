@@ -73,6 +73,18 @@ function (Controller) {
             oRouter.navTo("scores");
         },
 
+        onSound: function () {
+            if (window.menuMusic) {
+                if (window.menuMusic.paused) {
+                    window.menuMusic.play();
+                } else if (window.menuMusic.played) {
+                    window.menuMusic.pause();
+                } else {
+                    window.menuMusic.play();
+                }
+            };
+        },
+
         onNavBack: function () {    
             menuMusic.pause();
 

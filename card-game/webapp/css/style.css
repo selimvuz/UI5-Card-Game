@@ -61,24 +61,24 @@
 
 @media (max-width: 768px) {
     .easy-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
 .medium-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr) !important;
     grid-auto-rows: 1fr;
 }
 
 @media (max-width: 1024px) {
     .medium-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
 @media (max-width: 768px) {
     .medium-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
@@ -127,6 +127,11 @@
     transform: translateY(+0px);
 }
 
+.pokemon-card.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .pokemon-card.nodeal.flipped {
     transform: rotateY(180deg);
 }
@@ -158,6 +163,10 @@
 
 .pokemon-card-back {
     transform: rotateY(180deg);
+}
+
+.logo {
+    transform: translateY(-100px)
 }
 
 .sapUiRespGridSpanXL3 {
