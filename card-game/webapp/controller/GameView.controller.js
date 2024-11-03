@@ -183,6 +183,9 @@ sap.ui.define([
                 var oBundle = this.getView().getModel("i18n").getResourceBundle();
                 var timeText = oBundle.getText("label.time", [time]);
                 var scoreText = oBundle.getText("label.score", [this.currentScore]);
+                var sStartMessage = oBundle.getText("startMessage");
+
+                MessageToast.show(sStartMessage);
                 
                 timerDisplay.setText(timeText + " | " + scoreText);
             }.bind(this), 1000);
