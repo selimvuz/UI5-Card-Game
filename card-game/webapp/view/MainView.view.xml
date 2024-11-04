@@ -9,7 +9,7 @@
         </headerContent>
 
         <VBox class="center-container" justifyContent="Center" alignItems="Center" id="menuContent">
-        <Image class="logo" src="../assets/logo.png" alt="Pokemon Logo" width="100%" height="auto" />
+        <Image class="logo" src="../assets/logo.png" alt="Pokemon Logo" height="auto" />
 
         <Input
             id="usernameInput"
