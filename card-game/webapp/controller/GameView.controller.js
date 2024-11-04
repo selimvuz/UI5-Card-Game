@@ -258,6 +258,7 @@ sap.ui.define([
 
         updateScoreDisplay: function () {
             var timerDisplay = this.byId("timerDisplay");
+            // Burası hardcoded kalmış değiştireceğim
             timerDisplay.setText("Zaman: " + timerDisplay.getText().split(" ")[1] + " | Puan: " + this.currentScore);
         },
 
