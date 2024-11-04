@@ -98,11 +98,11 @@ sap.ui.define([
                     break;
                 case "medium":
                     pokemonCount = 6;
-                    gridSettings = {defaultSpan: "L4 M6 S12"};
+                    gridSettings = {defaultSpan: "L2 M6 S12"};
                     break;
                 case "hard":
                     pokemonCount = 8;
-                    gridSettings = {defaultSpan: "L3 M6 S12"};
+                    gridSettings = {defaultSpan: "L2 M6 S12"};
                     break;
             }
 
